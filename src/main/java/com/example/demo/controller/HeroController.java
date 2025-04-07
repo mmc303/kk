@@ -61,18 +61,18 @@ public class HeroController {
     @PostMapping
     public ResponseEntity<Hero> createHero(@RequestBody Hero hero) {
         try {
-            Hero newHero = heroRepository.save(new Hero(hero.getName()));
+            Hero nuevoHero = heroRepository.save(new Hero(hero.getName()));
             
-            if (hero.getPowers() != null) {
-                for (Superpoder power : hero.getPowers()) {
-                    Superpoder newPower = new Superpoder(power.getName());
-                    newPower.setHero(newHero);
-                    superpoderRepository.save(newPower);
-                    newHero.getPowers().add(newPower);
+            if (hero.getSuperpoderes() != null) {
+                for (Superpoder power : hero.getSuperpoderes()) {
+                    Superpoder nuevoPoder = new Superpoder(power.getName());
+                    nuevoPoder.setHero(nuevoHero);
+                    superpoderRepository.save(nuevoPoder);
+                    nuevoHero.getSuperpoderes().add(nuevoPoder);
                 }
             }
             
-            return new ResponseEntity<>(newHero, HttpStatus.CREATED);
+            return new ResponseEntity<>(nuevoHero, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -83,24 +83,24 @@ public class HeroController {
         Optional<Hero> heroData = heroRepository.findById(id);
         
         if (heroData.isPresent()) {
-            Hero existingHero = heroData.get();
-            existingHero.setName(hero.getName());
+            Hero currentHero = heroData.get();
+            currentHero.setName(hero.getName());
             
-            for (Superpoder power : existingHero.getPowers()) {
+            for (Superpoder power : currentHero.getSuperpoderes()) {
                 superpoderRepository.deleteById(power.getId());
             }
-            existingHero.getPowers().clear();
+            currentHero.getSuperpoderes().clear();
             
-            if (hero.getPowers() != null) {
-                for (Superpoder power : hero.getPowers()) {
-                    Superpoder newPower = new Superpoder(power.getName());
-                    newPower.setHero(existingHero);
-                    superpoderRepository.save(newPower);
-                    existingHero.getPowers().add(newPower);
+            if (hero.getSuperpoderes() != null) {
+                for (Superpoder poder : hero.getSuperpoderes()) {
+                    Superpoder nuevoPoder = new Superpoder(poder.getName());
+                    nuevoPoder.setHero(currentHero);
+                    superpoderRepository.save(nuevoPoder);
+                    currentHero.getSuperpoderes().add(nuevoPoder);
                 }
             }
             
-            return new ResponseEntity<>(heroRepository.save(existingHero), HttpStatus.OK);
+            return new ResponseEntity<>(heroRepository.save(currentHero), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

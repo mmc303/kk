@@ -20,10 +20,10 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/search")
+    @GetMapping("/apellido")
     public ResponseEntity<List<User>> searchByName(@RequestParam String name) {
         try {
-            List<User> users = userRepository.findByNameContainingIgnoreCase(name);
+            List<User> users = userRepository.buscarApellidos(name);
             
             if (users.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

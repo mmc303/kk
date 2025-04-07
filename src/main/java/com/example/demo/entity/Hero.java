@@ -50,28 +50,23 @@ public class Hero {
         this.name = name;
     }
     
-    public List<Superpoder> getPowers() {
+    public List<Superpoder> getSuperpoderes() {
         return powers;
     }
     
-    public void setPowers(List<Superpoder> powers) {
+    public void setSuperpoderes(List<Superpoder> powers) {
         this.powers = powers;
     }
     
     // Helper method to add a power
-    public void addPower(Superpoder power) {
+    public void addPoder(Superpoder power) {
         powers.add(power);
         power.setHero(this);
     }
     
     // Helper method to remove a power
-    public void removePower(Superpoder power) {
+    public void removeSuperpoder(Superpoder power) {
         powers.remove(power);
         power.setHero(null);
-    }
-    
-    @Override
-    public String toString() {
-        return "Hero [id=" + id + ", name=" + name + ", powers=" + powers + "]";
     }
 }

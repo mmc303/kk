@@ -21,9 +21,9 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/apellido")
-    public ResponseEntity<List<User>> searchByName(@RequestParam String name) {
+    public ResponseEntity<List<User>> buscarPorApellido(@RequestParam String name) {
         try {
-            List<User> users = userRepository.buscarApellidos(name);
+            List<User> users = userRepository.findByApellidoContainingIgnoreCase(name);
             
             if (users.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

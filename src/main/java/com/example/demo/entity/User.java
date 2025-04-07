@@ -23,12 +23,16 @@ public class User {
     @Email
     private String email;
 
+    @NotBlank(message = "Name is mandatory")
+    private String apellido;
+
     public User() {
     }
 
-    public User(String name, String email) {
+    public User(String name, String email, String apellido) {
         this.name = name;
         this.email = email;
+        this.apellido = apellido;
     }
 
     public long getId() {
@@ -47,6 +51,14 @@ public class User {
         this.name = name;
     }
 
+    public String getApellido() {
+        return name;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -57,7 +69,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", email=" + email + "]";
+        return "User [id=" + id + ", name=" + name + ", email=" + email + " apellido=" + apellido + "]";
     }
 
 }

@@ -9,5 +9,5 @@ import com.example.demo.entity.User;
 
 @RepositoryRestResource
 public interface UserRepository extends CrudRepository<User, Long> {
-    List<User> buscarApellidos(String name);
+    List<User> findByApellidoContainingIgnoreCase(String apellido);
 }

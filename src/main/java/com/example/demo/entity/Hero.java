@@ -25,7 +25,7 @@ public class Hero {
     private String name;
     
     @OneToMany(mappedBy = "hero", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Superpoder> powers = new ArrayList<>();
+    private List<Superpoder> superpoderes = new ArrayList<>();
     
     public Hero() {
     }
@@ -51,22 +51,20 @@ public class Hero {
     }
     
     public List<Superpoder> getSuperpoderes() {
-        return powers;
+        return superpoderes;
     }
     
-    public void setSuperpoderes(List<Superpoder> powers) {
-        this.powers = powers;
+    public void setSuperpoderes(List<Superpoder> superpoderes) {
+        this.superpoderes = superpoderes;
     }
     
-    // Helper method to add a power
-    public void addPoder(Superpoder power) {
-        powers.add(power);
-        power.setHero(this);
+    public void addPoder(Superpoder poder) {
+        superpoderes.add(poder);
+        poder.setHero(this);
     }
     
-    // Helper method to remove a power
-    public void removeSuperpoder(Superpoder power) {
-        powers.remove(power);
-        power.setHero(null);
+    public void removeSuperpoder(Superpoder poder) {
+        superpoderes.remove(poder);
+        poder.setHero(null);
     }
 }
